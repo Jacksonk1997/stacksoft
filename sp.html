@@ -10,11 +10,35 @@
             background-color: #f9f9f9;
             color: #333;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            overflow: hidden;
+        }
+        .cover, .invitation {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #fff;
+        }
+        .cover {
+            display: flex;
+            flex-direction: column;
+        }
+        .cover h1 {
+            font-size: 36px;
+            margin: 20px 0;
+        }
+        .invitation {
+            overflow-y: auto;
         }
         .container {
             max-width: 600px;
-            margin: 0 auto;
+            margin: 20px auto;
             background-color: #fff;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -40,6 +64,20 @@
         .content h2 {
             margin-top: 0;
         }
+        .carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            max-height: 300px;
+            margin: 20px 0;
+        }
+        .carousel img {
+            width: 100%;
+            display: none;
+        }
+        .carousel img.active {
+            display: block;
+        }
         .footer {
             text-align: center;
             padding-top: 20px;
@@ -53,24 +91,53 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="https://via.placeholder.com/100" alt="Logo">
-            <h1>邀请函</h1>
-        </div>
-        <div class="content">
-            <h2>尊敬的[受邀者姓名]：</h2>
-            <p>我们诚挚地邀请您参加我们的活动。此活动旨在[简要介绍活动目的]，并将于以下时间和地点举行：</p>
-            <p><strong>日期：</strong>2024年6月15日</p>
-            <p><strong>时间：</strong>下午2点</p>
-            <p><strong>地点：</strong>北京市朝阳区[具体地点]</p>
-            <p>期待您的莅临，与我们共同度过一个美好的时光。如需更多信息或确认您的出席，请联系：[联系人姓名]，电话：[联系电话]，邮箱：[联系邮箱]。</p>
-            <p>此致</p>
-            <p>[主办方名称]</p>
-        </div>
-        <div class="footer">
-            <p>&copy; 2024 [公司/组织名称]. 保留所有权利。</p>
+    <div class="cover" onclick="showInvitation()">
+        <h1>邀请函</h1>
+        <p>点击屏幕进入</p>
+    </div>
+    <div class="invitation">
+        <div class="container">
+            <div class="header">
+                <img src="https://via.placeholder.com/100" alt="Logo">
+                <h1>邀请函</h1>
+            </div>
+            <div class="content">
+                <h2>尊敬的[受邀者姓名]：</h2>
+                <p>我们诚挚地邀请您参加我们的活动。此活动旨在[简要介绍活动目的]，并将于以下时间和地点举行：</p>
+                <p><strong>日期：</strong>2024年6月15日</p>
+                <p><strong>时间：</strong>下午2点</p>
+                <p><strong>地点：</strong>北京市朝阳区[具体地点]</p>
+                <p>期待您的莅临，与我们共同度过一个美好的时光。如需更多信息或确认您的出席，请联系：[联系人姓名]，电话：[联系电话]，邮箱：[联系邮箱]。</p>
+                <div class="carousel">
+                    <img src="https://via.placeholder.com/600x300?text=活动图片1" class="active" alt="活动图片1">
+                    <img src="https://via.placeholder.com/600x300?text=活动图片2" alt="活动图片2">
+                    <img src="https://via.placeholder.com/600x300?text=活动图片3" alt="活动图片3">
+                </div>
+                <p>此致</p>
+                <p>[主办方名称]</p>
+            </div>
+            <div class="footer">
+                <p>&copy; 2024 [公司/组织名称]. 保留所有权利。</p>
+            </div>
         </div>
     </div>
+
+    <script>
+        function showInvitation() {
+            document.querySelector('.cover').style.display = 'none';
+            document.querySelector('.invitation').style.display = 'block';
+            startCarousel();
+        }
+
+        function startCarousel() {
+            let index = 0;
+            const images = document.querySelectorAll('.carousel img');
+            setInterval(() => {
+                images[index].classList.remove('active');
+                index = (index + 1) % images.length;
+                images[index].classList.add('active');
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
